@@ -25,6 +25,9 @@ export async function createPost(req, res) {
             req.id
         )
 
+        const io = req.app.get("io")
+        io.emit("newPost", post)
+
         return res.status(201).json(post)
     } catch (error) {
         console.error("포스트 작성 오류:", error)

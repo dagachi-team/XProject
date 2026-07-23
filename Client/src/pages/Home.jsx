@@ -1,10 +1,14 @@
-import { Activity, useState } from "react"
-import { useEffect } from "react"
+import { Activity, useState, useEffect, useCallback } from "react"
 import { useNavigate, useSearchParams } from "react-router-dom"
 import styles from "./Home.module.css"
 import { AiOutlineHeart, AiFillHeart , AiOutlineUser} from "react-icons/ai";
+import { useSocket } from "../hooks/useSocket.js" 
 
-const API_URL = import.meta.env.VITE_API_URL
+const BASE_URL = import.meta.env.VITE_USE_LOCAL === "true"
+    ? import.meta.env.VITE_LOCAL_API_URL
+    : import.meta.env.VITE_REMOTE_API_URL
+
+const API_URL = BASE_URL
 
 export default function Home() {
     const [posts, setPosts] = useState([])
@@ -61,6 +65,13 @@ export default function Home() {
         fetchMyInfo() // 내 정보 먼저 가져오고
         fetchPosts()  // 게시글 목록 가져오기
     }, [])
+
+    // 소켓 핸들러
+    const handleNewPost = useCallback((newPost) => {        // 추가
+        setPosts((prev) => [newPost, ...prev])
+    }, [])
+
+    useSocket({ handleNewPost })
 
     // 수정 함수
     const handleEdit = (post) => {

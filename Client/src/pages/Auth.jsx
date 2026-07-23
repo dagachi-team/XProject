@@ -2,7 +2,11 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import styles from "./Auth.module.css" // CSS 파일 임포트
 
-const API_URL = import.meta.env.VITE_API_URL
+const BASE_URL = import.meta.env.VITE_USE_LOCAL === "true"
+    ? import.meta.env.VITE_LOCAL_API_URL
+    : import.meta.env.VITE_REMOTE_API_URL
+
+const API_URL = BASE_URL
 
 export default function Auth() {
     const [userid, setUserid] = useState("")

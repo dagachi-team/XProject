@@ -67,7 +67,7 @@ export async function update(title, content, image, postid) {
     return getPosts().findOneAndUpdate(
         { _id: new ObjectId(postid) },
         { $set: { title, content, image } },
-        { ReturnDocument: "after" }
+        { returnDocument: "after" }
     ).then((result)=>result)
 }
 
@@ -76,7 +76,7 @@ export async function addLike(postid,userid){
     return getPosts().findOneAndUpdate(
         {_id: new ObjectId(postid)},
         { $push: { likes: userid } }, 
-        { ReturnDocument: "after" }
+        { returnDocument: "after" }
     )
 }
 
