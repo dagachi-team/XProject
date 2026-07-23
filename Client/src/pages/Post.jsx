@@ -23,6 +23,7 @@ export default function Post() {
     const [img, setImg] = useState(null)
     const [error, setError] = useState("")
     const [preview, setPreview] = useState("")
+    const [removeImage, setRemoveImage] = useState(false)
 
     /*
      * 수정 페이지로 들어왔을 때
@@ -104,6 +105,9 @@ export default function Post() {
 
             formData.append("title", title.trim())
             formData.append("content", content.trim())
+            formData.append("removeImage", String(removeImage))
+
+
 
             // 새 이미지가 선택됐을 때만 전송
             if (img) {
@@ -208,7 +212,7 @@ export default function Post() {
                                 <button
                                     type="button"
                                     className="remove-img-btn"
-                                    onClick={() => { setImg(null); setPreview(""); }}
+                                    onClick={() => { setImg(null); setPreview(""); setRemoveImage(true); }}
                                 >
                                     이미지 취소
                                 </button>

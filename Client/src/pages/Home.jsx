@@ -70,8 +70,19 @@ export default function Home() {
     const handleNewPost = useCallback((newPost) => {        // 추가
         setPosts((prev) => [newPost, ...prev])
     }, [])
+    
+    const handlePostUpdated = useCallback((updatedPost) => {
+        console.log("postUpdated 받음!!!!!!!!!!!!!!!!:", updatedPost)
+        setPosts((prev) =>
+            prev.map((post) => (post._id === updatedPost._id ? updatedPost : post))
+        )
+    }, [])
 
-    useSocket({ handleNewPost })
+    const handlePostDeleted = useCallback(({ postid }) => {
+        setPosts((prev) => prev.filter((post) => post._id !== postid))
+    }, [])
+
+    useSocket({ handleNewPost, handlePostUpdated, handlePostDeleted })
 
     // 수정 함수
     const handleEdit = (post) => {
