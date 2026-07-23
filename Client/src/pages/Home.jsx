@@ -1,5 +1,5 @@
-import { Activity, useState, useEffect, useCallback } from "react"
-import { useNavigate, useSearchParams } from "react-router-dom"
+import { useState, useEffect, useCallback } from "react"
+import { useNavigate } from "react-router-dom"
 import styles from "./Home.module.css"
 import { AiOutlineHeart, AiFillHeart , AiOutlineUser} from "react-icons/ai";
 import { useSocket } from "../hooks/useSocket.js" 
@@ -57,7 +57,7 @@ export default function Home() {
             setPosts(data)
 
         } catch (error) {
-            console.log("전체 포스트 조회 실패")
+            console.log("전체 포스트 조회 실패: ", error)
         }
     }
 
@@ -160,49 +160,49 @@ export default function Home() {
 
 const formatNiceDate = (isoString) => {
     if (!isoString) return ""
-        const createdDate = new Date(isoString)
-        const now = new Date()
+    const createdDate = new Date(isoString)
+    const now = new Date()
 
-        // 현재 시간 - 작성 시간
-        const difference = now - createdDate
+    // 현재 시간 - 작성 시간
+    const difference = now - createdDate
 
-        // 잘못된 날짜
-        if (Number.isNaN(createdDate.getTime())) {
-            return ""
-        }
+    // 잘못된 날짜
+    if (Number.isNaN(createdDate.getTime())) {
+        return ""
+    }
 
-        // 미래 시간으로 저장된 경우
-        if (difference < 0) {
-            return "방금 전"
-        }
+    // 미래 시간으로 저장된 경우
+    if (difference < 0) {
+        return "방금 전"
+    }
 
-        const seconds = Math.floor(difference / 1000)
-        const minutes = Math.floor(seconds / 60)
-        const hours = Math.floor(minutes / 60)
-        const days = Math.floor(hours / 24)
+    const seconds = Math.floor(difference / 1000)
+    const minutes = Math.floor(seconds / 60)
+    const hours = Math.floor(minutes / 60)
+    const days = Math.floor(hours / 24)
 
-        if (seconds < 60) {
-            return "방금 전"
-        }
+    if (seconds < 60) {
+        return "방금 전"
+    }
 
-        if (minutes < 60) {
-            return `${minutes}분 전`
-        }
+    if (minutes < 60) {
+        return `${minutes}분 전`
+    }
 
-        if (hours < 24) {
-            return `${hours}시간 전`
-        }
+    if (hours < 24) {
+        return `${hours}시간 전`
+    }
 
-        if (days < 30) {
-            return `${days}일 전`
-        }
+    if (days < 30) {
+        return `${days}일 전`
+    }
 
-        return new Intl.DateTimeFormat("ko-KR", {
-            year: "numeric",
-            month: "2-digit",
-            day: "2-digit"
-        }).format(createdDate)
-    }
+    return new Intl.DateTimeFormat("ko-KR", {
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit"
+        }).format(createdDate)
+    }
 
     return (
         <section className={styles.homeContainer}>
