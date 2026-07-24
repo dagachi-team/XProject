@@ -82,7 +82,13 @@ export default function Home() {
         setPosts((prev) => prev.filter((post) => post._id !== postid))
     }, [])
 
-    useSocket({ handleNewPost, handlePostUpdated, handlePostDeleted })
+    const handlePostLiked = useCallback((updatedPost) => {
+        setPosts((prev) =>
+            prev.map((post) => (post._id === updatedPost._id ? updatedPost : post))
+        )
+    }, [])
+
+    useSocket({ handleNewPost, handlePostUpdated, handlePostDeleted, handlePostLiked })
 
     // 수정 함수
     const handleEdit = (post) => {
@@ -108,8 +114,6 @@ export default function Home() {
             if (!response.ok) {
                 throw new Error("게시글 좋아요에 실패했습니다.")
             }
-
-            await fetchPosts()
 
         } catch (error) {
             console.error(error)
