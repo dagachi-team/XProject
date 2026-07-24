@@ -2,6 +2,8 @@ import { useEffect } from "react"
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
+import "./index.css"
+import "./App.css"
 import Root from "./pages/Root"
 import Home from "./pages/Home"
 import Login from "./pages/Login"
@@ -35,14 +37,16 @@ function App() {
       const strLikerId = String(data.likerId)
 
       if (strMyId === strAuthorId) {
-        toast.info("회원님의 게시글에 누군가 좋아요를 눌렀습니다!", {
-          position: "top-right",
+        toast.info("♥️회원님의 게시글에 누군가 좋아요를 눌렀습니다!♥️", {
+          position: "bottom-right",
           autoClose: 3000,
+          className: "custom-toast"
         })
       } else if (strMyId === strLikerId) {
-        toast.info("게시글에 좋아요를 눌렀습니다!", {
-          position: "top-right",
+        toast.info("♥️게시글에 좋아요를 눌렀습니다!♥️", {
+          position: "bottom-right",
           autoClose: 3000,
+          className: "custom-toast"
         })
       }
     }
