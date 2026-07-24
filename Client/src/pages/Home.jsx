@@ -1,8 +1,9 @@
 import { useState, useEffect, useCallback } from "react"
 import { useNavigate } from "react-router-dom"
 import styles from "./Home.module.css"
-import { AiOutlineHeart, AiFillHeart , AiOutlineUser} from "react-icons/ai";
+import { AiOutlineHeart, AiFillHeart , AiOutlineUser} from "react-icons/ai"
 import { useSocket } from "../hooks/useSocket.js" 
+import { toast } from "react-toastify"
 
 const BASE_URL = import.meta.env.VITE_USE_LOCAL === "true"
     ? import.meta.env.VITE_LOCAL_API_URL
@@ -112,10 +113,15 @@ export default function Home() {
             })
 
             if (!response.ok) {
-                throw new Error("게시글 좋아요에 실패했습니다.")
+                const errorData = await response.json()
+                throw new Error(errorData.message || "게시글 좋아요에 실패했습니다.")
             }
 
         } catch (error) {
+            toast.error(error.message, {
+                position: "bottom-right",
+                autoClose: 3000
+            })
             console.error(error)
         }
     }

@@ -3,7 +3,6 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import "./index.css"
-import "./App.css"
 import Root from "./pages/Root"
 import Home from "./pages/Home"
 import Login from "./pages/Login"
@@ -25,7 +24,7 @@ const router = createBrowserRouter([
 ])
 
 function App() {
-  // 알림 수신 로직 추가
+  // 좋아요 알림 수신 로직
   useEffect(() => {
     const handleLikeNotification = (data) => {
       const myId = localStorage.getItem("useridx")
@@ -37,13 +36,13 @@ function App() {
       const strLikerId = String(data.likerId)
 
       if (strMyId === strAuthorId) {
-        toast.info("♥️회원님의 게시글에 누군가 좋아요를 눌렀습니다!♥️", {
+        toast.info("게시글에 좋아요가 달렸습니다", {
           position: "bottom-right",
           autoClose: 3000,
-          className: "custom-toast"
+          className: "custom-toast liked-toast"
         })
       } else if (strMyId === strLikerId) {
-        toast.info("♥️게시글에 좋아요를 눌렀습니다!♥️", {
+        toast.info("게시글에 좋아요를 눌렀습니다", {
           position: "bottom-right",
           autoClose: 3000,
           className: "custom-toast"
@@ -57,6 +56,26 @@ function App() {
       socket.off("postLikedNotification", handleLikeNotification)
     }
   }, [])
+  
+  // 새 글작성 알림 수신 로직
+  useEffect(() => {
+    const handleNewPostNotification = (post) => {
+      const myId = localStorage.getItem("userid")
+      if (post.userid === myId) return   // 본인 글이면 알림 안 띄움
+
+      toast.info("새로운 글이 올라왔습니다", {
+          position: "bottom-right",
+          autoClose: 3000,
+          className: "custom-toast"
+      })
+    }
+
+    socket.on("newPost", handleNewPostNotification)
+
+    return () => {
+        socket.off("newPost", handleNewPostNotification)
+    }
+}, [])
 
   return (
     <>

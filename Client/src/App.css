@@ -1,5 +1,0 @@
-/* 좋아요 알림창 */
-.custom-toast {
-    --toastify-icon-color-info: var(--main-color);   /* 아이콘 색 */
-    --toastify-color-progress-info: var(--main-color);   /* 진행바 색 */
-}
