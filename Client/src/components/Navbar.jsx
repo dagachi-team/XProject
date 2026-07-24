@@ -19,6 +19,7 @@ export default function Navbar() {
 
         localStorage.removeItem("token")
         localStorage.removeItem("userid")
+        localStorage.removeItem("useridx")
         navigate("/")
     }
 
