@@ -20,12 +20,6 @@
     /* form */
     --form-bg: #f4f4f4;
     --form-color: #888888;
-
-    /* 좋아요 알림창 */
-  .custom-toast {
-      --toastify-icon-color-info: var(--main-color);   /* 아이콘 색 */
-      --toastify-color-progress-info: var(--main-color);   /* 진행바 색 */
-  }
 }
 
 /* class style */
