@@ -241,6 +241,7 @@ const formatNiceDate = (isoString) => {
 
                 {posts.map((post) => {
                     const isLiked = post.likes?.includes(currentUserId)
+                    const isMyPost = currentUserId === post.idx     // 내 글에서만 수정, 삭제 버튼 보이도록
 
                     return (
                         <li className={styles.postItem} key={post._id}>
@@ -270,8 +271,12 @@ const formatNiceDate = (isoString) => {
                             </div>
 
                             <div className={styles.buttonBox}>
-                                <button className={styles.editBtn} type="button" onClick={() => handleEdit(post)}>수정</button>
-                                <button className={styles.delBtn} type="button" onClick={() => handleDelete(post)}>삭제</button>
+                                {isMyPost && (
+                                    <>
+                                        <button className={styles.editBtn} type="button" onClick={() => handleEdit(post)}>수정</button>
+                                        <button className={styles.delBtn} type="button" onClick={() => handleDelete(post)}>삭제</button>
+                                    </>
+                                )}
                             </div>
                         </li>
                     )
