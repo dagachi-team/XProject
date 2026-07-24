@@ -1,7 +1,8 @@
 import { useState, useEffect, useCallback } from "react"
 import { useNavigate } from "react-router-dom"
 import styles from "./Home.module.css"
-import { AiOutlineHeart, AiFillHeart , AiOutlineUser} from "react-icons/ai"
+import { AiOutlineHeart, AiFillHeart, AiOutlineUser } from "react-icons/ai"
+import { FaRegClock } from "react-icons/fa6"
 import { useSocket } from "../hooks/useSocket.js" 
 import { toast } from "react-toastify"
 
@@ -260,9 +261,11 @@ const formatNiceDate = (isoString) => {
                                         <span>{post.likes?.length || 0} </span>
                                     </div>
                                     <div className={styles.date}>
-                                        <span>{formatNiceDate(post.createdAt)}</span>
+                                        <span>
+                                            <FaRegClock /> {formatNiceDate(post.createdAt)}
+                                        </span>
                                     </div>
-                                    <div className="{styles.usename">
+                                    <div className={styles.username}>
                                         <span>
                                             <AiOutlineUser /> {post.name}
                                         </span>

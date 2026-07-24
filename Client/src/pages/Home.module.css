@@ -155,7 +155,7 @@
     word-break: break-word;
 }
 
-/* 좋아요와 날짜 영역 */
+/* 좋아요 날짜 작성자 영역 */
 .btWr {
     margin-top: auto;
     padding-top: 25px;
@@ -163,6 +163,14 @@
     display: flex;
     align-items: center;
     gap: 14px;
+
+    color: var(--text-sub-color);
+}
+
+.btWr span {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
 }
 
 /* 좋아요 전체 영역 */
@@ -197,16 +205,16 @@ button.likeBtn svg {
     height: 100%;
 
     transition: var(--transition);
+
+    fill: var(--main-hover);
 }
 
 .outlineHeart {
     opacity: 1;
-    color: var(--text-sub-color);
 }
 
 .fillHeart {
     opacity: 0;
-    color: #ff4f7b;
 }
 
 button.likeBtn:hover .outlineHeart {
@@ -216,18 +224,34 @@ button.likeBtn:hover .outlineHeart {
 button.likeBtn:hover .fillHeart {
     opacity: 1;
     transform: scale(1.1);
+
+    color: var(--main-color);
+}
+
+/* 날짜 아이콘 */
+.date svg {
+    width: 16px;
+    height: 16px;
 }
 
 /* 날짜 */
 .date {
-    padding-left: 14px;
-
-    border-left: 1px solid var(--border-color);
-
-    color: var(--text-sub-color);
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 400;
 }
+
+/* 글작성자명 아이콘 */
+.username svg {
+    width: 20px;
+    height: 20px;
+}
+
+
+/* 글작성자명 */
+.username {
+    font-size: 16px;
+}
+
 
 /* 수정·삭제 버튼 영역 */
 .buttonBox {
@@ -361,6 +385,8 @@ button.likeBtn:hover .fillHeart {
     .btWr {
         padding-top: 8px;
         gap: 8px;
+
+        color: var(--text-sub-color);
     }
 
     div.likeBtn {
@@ -379,6 +405,10 @@ button.likeBtn:hover .fillHeart {
     .date {
         padding-left: 8px;
 
+        font-size: 11px;
+    }
+
+    .username {
         font-size: 11px;
     }
 
