@@ -22,7 +22,7 @@ app.use(express.static(path.join(__dirname, "public")))
 const PORT = process.env.HOST_PORT || 8080
 const MONGODB_URI = process.env.DB_HOST
 
-const allowOrigin = ["http://localhost:5173", "https://3zp8c6jg-5173.jpe1.devtunnels.ms", "http://127.0.0.1:8080", "https://3zp8c6jg-8080.jpe1.devtunnels.ms",]
+const allowOrigin = ["http://localhost:5173", "https://3zp8c6jg-5173.jpe1.devtunnels.ms", "http://127.0.0.1:8080", "https://3zp8c6jg-8080.jpe1.devtunnels.ms"]
 
 const server = http.createServer(app)
 const io = new Server(server, {
