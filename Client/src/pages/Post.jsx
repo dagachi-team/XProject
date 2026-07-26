@@ -44,7 +44,7 @@ export default function Post() {
         setImg(null)
 
         if (isEdit) {
-            // 수정 모드에서는 기존 내용으로 되돌리기
+            // 수정 모드에서는 기존 내용으로 초기화
             setTitle(post.title || "")
             setContent(post.content || "")
             setPreview(post.image || "")
@@ -153,7 +153,7 @@ export default function Post() {
     }
 
     return (
-        <main className="post-container">
+        <div className="post-container">
             <div className="post-card-form">
                 <h1>
                     {isEdit ? "글 수정" : "글 작성"}
@@ -228,11 +228,11 @@ export default function Post() {
                             type="button"
                             onClick={resetForm}
                         >
-                            되돌리기
+                            초기화
                         </button>
                     </div>
                 </form>
             </div>
-        </main>
+        </div>
     )
 }
